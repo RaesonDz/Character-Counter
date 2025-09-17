@@ -1,0 +1,117 @@
+:root{
+  --bg:#000;
+  --panel:#0a0a0f;
+  --neon-green:#00ff88;
+  --neon-red:#ff4d6d;
+  --neon-cyan:#32fff8;
+}
+
+body.dark-mode{
+  background:var(--bg);
+  color:#cfeef1;
+  overflow:hidden;
+  font-family: "Cairo", monospace;
+}
+
+#matrix-canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+/* Terminal layout */
+.terminal{
+  position:relative;
+  min-height:100vh;
+  z-index:2;
+  padding:2rem;
+}
+
+/* Panel */
+.panel{
+  width:min(920px,95vw);
+  background:rgba(20,20,30,0.9);
+  border:1px solid rgba(0,255,170,0.15);
+  box-shadow:0 0 20px rgba(0,255,136,0.2);
+  backdrop-filter:blur(6px);
+}
+
+/* Titles */
+.title{
+  color:var(--neon-cyan);
+  font-weight:700;
+  letter-spacing:2px;
+  text-shadow:0 0 6px var(--neon-cyan), 0 0 18px rgba(50,255,248,0.4);
+}
+
+.muted{ color: rgba(200,255,255,0.3); }
+
+/* Neon label */
+.neon-label{
+  color:var(--neon-green);
+  font-weight:600;
+  text-shadow:0 0 6px rgba(0,255,136,0.5);
+}
+
+.input-wrapper{ position:relative; }
+.neon-input{
+  position:relative;
+  z-index:3;
+  background:transparent;
+  border:1px solid rgba(0,255,136,0.3);
+  color:transparent; /* hide typed text */
+  caret-color:var(--neon-red);
+}
+.password-display{
+  position:absolute;
+  left:12px;
+  top:6px;
+  right:12px;
+  bottom:6px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:12px 14px;
+  font-size:18px;
+  color:var(--neon-green);
+}
+.password-display .char{
+  display:inline-block;
+  animation: appear 0.3s ease forwards;
+}
+
+/* Melt animation */
+@keyframes melt {
+  0% { transform: translateY(0); opacity:1; }
+  100% { transform: translateY(100px) scale(0.8); opacity:0; filter:blur(4px); }
+}
+.char.melt{
+  animation: melt 0.9s forwards;
+  color:var(--neon-red);
+}
+
+/* Appear animation */
+@keyframes appear {
+  from {opacity:0; transform:scale(0.6);}
+  to {opacity:1; transform:scale(1);}
+}
+
+/* Neon buttons */
+.neon-btn{
+  background:transparent;
+  border:1px solid rgba(0,255,136,0.3);
+  color:var(--neon-green);
+  transition:0.2s;
+  animation: pulse 2s infinite;
+}
+.neon-btn.outline{
+  border:1px dashed rgba(0,255,136,0.3);
+}
+@keyframes pulse {
+  0% { box-shadow:0 0 6px rgba(0,255,136,0.2); }
+  50% { box-shadow:0 0 20px rgba(0,255,136,0.6); }
+  100% { box-shadow:0 0 6px rgba(0,255,136,0.2); }
+}
+
+.status{ font-weight:bold; font-family:monospace; }
