@@ -1,0 +1,627 @@
+:root {
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #c3cfe2;
+    --window-bg-color: #ffffff;
+    --window-text-color: #1a1a1a;
+    --window-text-secondary-color: #555;
+    --window-spec-bg: #f8f8f8;
+    --window-border-color: #e5e5e5;
+    --ui-border-radius: 8px; /* New CSS variable for UI corner radius */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Apply global font through JS to this element, overriding body if needed */
+    font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+    direction: rtl;
+}
+
+body {
+    /* Original font-family is a fallback if JS doesn't apply it to html */
+    font-family: inherit; /* Inherit from html or use fallback */
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary)); /* Subtle gradient for appealing background */
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #1a1a1a, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.instructions {
+    font-size: 1rem;
+    color: #888;
+    margin-top: 0.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.share-prompt {
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 0.5rem;
+    font-style: italic;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.emoji-car {
+    color: #FF4500; /* OrangeRed for a car-like color */
+    -webkit-text-fill-color: initial; /* Override text-fill-color */
+    background-clip: border-box; /* Override background-clip */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.emoji-car:hover {
+    transform: scale(1.2);
+}
+
+.form-section {
+    background: var(--window-bg-color);
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    border: 1px solid var(--window-border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, border-radius 0.3s ease; /* Add border-radius transition */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--window-text-color);
+    transition: color 0.3s ease;
+}
+
+select, input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--window-border-color);
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    font-size: 1rem;
+    transition: all 0.2s ease, border-radius 0.3s ease; /* Add border-radius transition */
+    background: var(--window-bg-color);
+    color: var(--window-text-color);
+    font-family: inherit; /* Inherit font from html */
+    resize: vertical;
+}
+
+select:focus, input:focus, textarea:focus {
+    outline: none;
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+}
+
+.generate-btn {
+    width: 100%;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease, border-radius 0.3s ease; /* Add border-radius transition */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.generate-btn:hover:not(:disabled) {
+    background: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.generate-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spinning {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+.car-result {
+    background: var(--window-bg-color);
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--window-border-color);
+    animation: slideUp 0.5s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, border-radius 0.3s ease; /* Add border-radius transition */
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.car-image-container {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--window-spec-bg);
+    transition: background-color 0.3s ease;
+}
+
+.car-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.car-image:hover {
+    transform: scale(1.05);
+}
+
+.car-details {
+    padding: 2rem;
+}
+
+.price-tag {
+    background: #1a1a1a;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    margin-bottom: 2rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: border-radius 0.3s ease; /* Add border-radius transition */
+}
+
+.price-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+}
+
+.car-price {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.car-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--window-text-color);
+    transition: color 0.3s ease;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--window-spec-bg);
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    border-right: 4px solid #1a1a1a;
+    border-left: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-radius 0.3s ease; /* Add border-radius transition */
+}
+
+.spec-item:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.spec-label {
+    font-weight: 500;
+    color: var(--window-text-secondary-color);
+    transition: color 0.3s ease;
+}
+
+.spec-value {
+    font-weight: 600;
+    color: var(--window-text-color);
+    transition: color 0.3s ease;
+}
+
+.car-description {
+    border-top: 1px solid var(--window-border-color);
+    padding-top: 1.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.car-description h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--window-text-color);
+    transition: color 0.3s ease;
+}
+
+.car-description p {
+    color: var(--window-text-secondary-color);
+    line-height: 1.7;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.car-extra-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--window-border-color);
+    transition: border-color 0.3s ease;
+}
+
+.detail-block h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--window-text-color);
+    transition: color 0.3s ease;
+}
+
+.detail-block p {
+    color: var(--window-text-secondary-color);
+    line-height: 1.7;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.features-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.features-list li {
+    position: relative;
+    padding-right: 1.5rem;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+    color: var(--window-text-secondary-color);
+    transition: color 0.3s ease;
+}
+
+.features-list li::before {
+    content: '✅';
+    position: absolute;
+    right: 0;
+    top: 1px;
+}
+
+.car-markets {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--window-border-color);
+    transition: border-color 0.3s ease;
+}
+
+.car-markets h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--window-text-color);
+    transition: color 0.3s ease;
+}
+
+.markets-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.market-tag {
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 0.5rem 1rem;
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease, border-radius 0.3s ease; /* Add border-radius transition */
+}
+
+.market-tag:hover {
+    background-color: #e0e0e0;
+    color: #1a1a1a;
+}
+
+.sound-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.sound-toggle {
+    background: #1a1a1a;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.sound-toggle:hover {
+    transform: scale(1.1);
+    background: #333;
+}
+
+/* Settings button */
+.top-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px; /* Spans the width to allow space-between */
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: center; /* Vertically centers them */
+    z-index: 1000;
+}
+
+.settings-button {
+    background: #1a1a1a;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    font-size: 1.2rem; /* Make emoji visible */
+    color: white; /* Ensure emoji color is visible */
+}
+
+.settings-button:hover {
+    transform: scale(1.1);
+    background: #333;
+}
+
+/* Modal styles */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1001; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: flex; /* Use flex to center content */
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: var(--window-bg-color); /* Apply new variable */
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 80%; /* Could be responsive */
+    max-width: 600px; /* Max width for larger screens */
+    border-radius: var(--ui-border-radius); /* Apply new variable */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+    transition: border-radius 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Add background-color and border-color transition */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--window-border-color); /* Apply new variable */
+    transition: border-color 0.3s ease; /* Add border-color transition */
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--window-text-color); /* Apply new variable */
+    transition: color 0.3s ease; /* Add color transition */
+}
+
+.modal-close-button {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: var(--window-text-color); /* Apply new variable */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    font-size: 1rem;
+    color: var(--window-text-secondary-color); /* Apply new variable */
+    transition: color 0.3s ease; /* Add color transition */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.tank-success-sound {
+    animation: fadeOut 1s ease-out forwards;
+}
+
+.total-generated {
+    font-size: 0.95rem;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .form-section,
+    .car-details {
+        padding: 1.5rem;
+    }
+    
+    .price-tag {
+        width: 100%;
+        align-items: center;
+    }
+
+    .specs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .spec-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .top-controls {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Add styles for tank mode */
+.tank-mode .spec-item {
+    border-left: 4px solid #4a5320; /* Military green accent */
+}
+
+.tank-mode .generate-btn {
+    background: #4a5320;
+}
+
+.tank-mode .generate-btn:hover:not(:disabled) {
+    background: #5a6330;
+}
+
+/* Style for Beta text */
+.beta-text {
+    font-size: 0.7em; /* Smaller font size relative to parent */
+    opacity: 0.6; /* Faded effect */
+    vertical-align: middle; /* Align with the emoji/text */
+    margin-left: 0.2em; /* Small space from emoji */
+    -webkit-text-fill-color: initial; /* Ensure text is visible */
+    background-clip: border-box; /* Ensure text is visible */
+    color: #555; /* Default color for the beta text */
+}
