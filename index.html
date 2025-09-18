@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garren - Projects & Tools Showcase</title>
+  <meta name="description" content="Garren - A modern showcase for projects and tools created and published by our team only.">
+  <link rel="canonical" href="http://localhost:3000/">
+  <meta property="og:title" content="Garren - Projects & Tools Showcase">
+  <meta property="og:description" content="Discover projects and tools created exclusively by the Garren team.">
+  <meta property="og:type" content="website">
 
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-dark text-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary-emphasis" href="index.html">
+        <i class="bi bi-cpu"></i> Garren
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#projects"><i class="bi bi-grid"></i> Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#subscribe"><i class="bi bi-envelope"></i> Subscribe</a></li>
+          <li class="nav-item"><a class="nav-link" href="#socials"><i class="bi bi-share"></i> Socials</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="py-5 text-center bg-tech">
+    <div class="container">
+      <h1 class="display-4 fw-bold"><i class="bi bi-lightning-charge-fill"></i> Welcome to Garren</h1>
+      <p class="lead">
+        A modern showcase where <strong>all projects and tools are created and published exclusively by our team</strong>.
+      </p>
+      <p class="text-muted">
+        We do not accept external submissions — every project you see here is part of our official work.
+      </p>
+    </div>
+  </header>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4"><i class="bi bi-grid-3x3-gap-fill"></i> Our Projects</h2>
+      <p class="text-center text-muted mb-5">
+        Explore carefully crafted projects and tools built and released by the <strong>Garren team only</strong>.
+      </p>
+      <div id="projects-container" class="row g-4">
+        <!-- Example Project Card -->
+        <div class="col-md-4">
+          <div class="card project-card h-100 shadow-sm">
+            <img src="https://via.placeholder.com/400x180" class="card-img-top" alt="Project Title">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Project Title</h5>
+              <p class="card-text">This is a short description of the project created by our team.</p>
+              <div class="mt-auto d-flex gap-2">
+                <a href="#" target="_blank" class="btn btn-primary w-50">
+                  <i class="bi bi-box-arrow-up-right"></i> Open
+                </a>
+                <a href="#" class="btn btn-buy w-50">
+                  <i class="bi bi-cart"></i> Buy
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- More projects dynamically loaded by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscribe Section -->
+  <section id="subscribe" class="py-5 bg-gradient text-center">
+    <div class="container">
+      <h2><i class="bi bi-envelope-open"></i> Stay Updated</h2>
+      <p>Subscribe with your email to get notified about new official projects from our team.</p>
+      <form id="subscribe-form" class="d-flex justify-content-center flex-wrap">
+        <input type="email" id="subscribe-email" class="form-control w-50 me-2 mb-2" placeholder="Enter your email" required>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Socials Section -->
+  <section id="socials" class="py-5">
+    <div class="container text-center">
+      <h2><i class="bi bi-share-fill"></i> Follow Us</h2>
+      <div id="socials-container" class="d-flex justify-content-center gap-4 mt-3">
+        <!-- Social links dynamically injected -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-3 text-center bg-dark-subtle text-dark mt-5">
+    <p class="mb-0">© 2025 Garren | All projects are officially published by our team | Developed by <strong>IMeD TaDJ EDDiNe</strong></p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

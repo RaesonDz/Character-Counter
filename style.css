@@ -1,0 +1,144 @@
+/* ====== General Theme ====== */
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #114695;
+  color: #e6edf3;
+  line-height: 1.6;
+}
+
+.bg-tech {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: #fff;
+}
+
+.bg-gradient {
+  background: linear-gradient(90deg, #0d6efd, #dc3545);
+}
+
+/* ====== Navbar ====== */
+.navbar {
+  border-bottom: 1px solid #30363d;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+}
+
+.nav-link {
+  color: #e6edf3 !important;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #0d6efd !important;
+}
+
+/* ====== Hero Section ====== */
+header h1 {
+  font-size: 2.8rem;
+}
+
+header p.lead {
+  font-size: 1.2rem;
+}
+
+/* ====== Cards (Projects) ====== */
+.project-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 1rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.4);
+}
+
+.project-card img {
+  border-radius: 1rem 1rem 0 0;
+  max-height: 180px;
+  object-fit: cover;
+}
+
+.project-card .card-body {
+  color: #e6edf3;
+}
+
+/* ====== Buttons ====== */
+.btn {
+  border-radius: .5rem;
+  font-weight: 600;
+  transition: all .3s ease;
+}
+
+.btn-primary {
+  background: #0d6efd;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #0b5ed7;
+}
+
+/* 🔹 Buy button (new) */
+.btn-buy {
+  background: linear-gradient(45deg, #28a745, #20c997);
+  border: none;
+  color: #fff;
+}
+
+.btn-buy:hover {
+  background: linear-gradient(45deg, #218838, #198754);
+  transform: scale(1.05);
+}
+
+/* ====== Forms ====== */
+form input[type="email"] {
+  background: #161b22;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+}
+
+form input[type="email"]::placeholder {
+  color: #6c757d;
+}
+
+/* ====== Socials ====== */
+#socials-container a {
+  color: #e6edf3;
+  transition: transform .3s ease, color .3s ease;
+}
+
+#socials-container a:hover {
+  color: #0d6efd;
+  transform: scale(1.2);
+}
+
+/* ====== Footer ====== */
+footer {
+  font-size: 0.9rem;
+  background: #161b22;
+  color: #aaa;
+  border-top: 1px solid #30363d;
+}
+
+/* ====== Sidebar (Admin Panel) ====== */
+.sidebar {
+  min-height: 100vh;
+  background: #161b22;
+  border-right: 1px solid #30363d;
+  padding: 1rem;
+}
+
+.sidebar .nav-link {
+  color: #e6edf3;
+  margin-bottom: .5rem;
+}
+
+.sidebar .nav-link:hover {
+  background: #0d6efd;
+  color: #fff;
+  border-radius: .4rem;
+  padding-left: .75rem;
+}
